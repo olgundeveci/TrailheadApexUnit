@@ -1,16 +1,18 @@
 public class VerifyDate {
-    public static Date verify(Date inputDate, Date startDate, Date endDate) {
-        if (inputDate >= startDate && inputDate <= endDate) {
-            return inputDate;
+    public static Date verifyDateRange(Date startDate, Date endDate, Date dateToVerify) {
+        if(dateToVerify >= startDate && dateToVerify <= endDate) {
+            return dateToVerify;
         } else {
-            Date endOfMonth = Date.newInstance(inputDate.year(), inputDate.month(), Date.daysInMonth(inputDate.year(), inputDate.month()));
-            if (startDate > inputDate) {
-                return startDate;
-            } else if (endDate < inputDate) {
-                return endOfMonth;
+            Integer year = startDate.year();
+            Integer month = startDate.month();
+            if(month == 12) {
+                month = 1;
+                year += 1;
             } else {
-                return inputDate;
+                month += 1;
             }
+            Date endOfMonth = Date.newInstance(year, month, 1).addDays(-1);
+            return endOfMonth >= endDate ? endDate : endOfMonth;
         }
     }
 }
