@@ -1,0 +1,57 @@
+@isTest
+private class TestVerifyDate {
+    @isTest
+    static void testVerifyDateInRange() {
+        Date inputDate = Date.newInstance(2023, 4, 3);
+        Date startDate = Date.newInstance(2023, 1, 1);
+        Date endDate = Date.newInstance(2023, 12, 31);
+        Date result = VerifyDate.verify(inputDate, startDate, endDate);
+        System.assertEquals(inputDate, result);
+    }
+    
+    @isTest
+    static void testVerifyDateBeforeRange() {
+        Date inputDate = Date.newInstance(2022, 12, 31);
+        Date startDate = Date.newInstance(2023, 1, 1);
+        Date endDate = Date.newInstance(2023, 12, 31);
+        Date result = VerifyDate.verify(inputDate, startDate, endDate);
+        System.assertEquals(startDate, result);
+    }
+    
+    @isTest
+    static void testVerifyDateAfterRange() {
+        Date inputDate = Date.newInstance(2024, 1, 1);
+        Date startDate = Date.newInstance(2023, 1, 1);
+        Date endDate = Date.newInstance(2023, 12, 31);
+        Date result = VerifyDate.verify(inputDate, startDate, endDate);
+        Date expected = Date.newInstance(2024, 1, 31);
+        System.assertEquals(expected, result);
+    }
+    
+    @isTest
+    static void testVerifyDateEqualsStartDate() {
+        Date inputDate = Date.newInstance(2023, 1, 1);
+        Date startDate = Date.newInstance(2023, 1, 1);
+        Date endDate = Date.newInstance(2023, 12, 31);
+        Date result = VerifyDate.verify(inputDate, startDate, endDate);
+        System.assertEquals(inputDate, result);
+    }
+    
+    @isTest
+    static void testVerifyDateEqualsEndDate() {
+        Date inputDate = Date.newInstance(2023, 12, 31);
+        Date startDate = Date.newInstance(2023, 1, 1);
+        Date endDate = Date.newInstance(2023, 12, 31);
+        Date result = VerifyDate.verify(inputDate, startDate, endDate);
+        System.assertEquals(inputDate, result);
+    }
+    
+    @isTest
+    static void testVerifyDateNull() {
+        Date inputDate = null;
+        Date startDate = Date.newInstance(2023, 1, 1);
+        Date endDate = Date.newInstance(2023, 12, 31);
+        Date result = VerifyDate.verify(inputDate, startDate, endDate);
+        System.assertEquals(inputDate, result);
+    }
+}
