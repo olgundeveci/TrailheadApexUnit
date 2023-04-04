@@ -1,0 +1,16 @@
+public class VerifyDate {
+    public static Date verify(Date inputDate, Date startDate, Date endDate) {
+        if (inputDate >= startDate && inputDate <= endDate) {
+            return inputDate;
+        } else {
+            Date endOfMonth = Date.newInstance(inputDate.year(), inputDate.month(), Date.daysInMonth(inputDate.year(), inputDate.month()));
+            if (startDate > inputDate) {
+                return startDate;
+            } else if (endDate < inputDate) {
+                return endOfMonth;
+            } else {
+                return inputDate;
+            }
+        }
+    }
+}
